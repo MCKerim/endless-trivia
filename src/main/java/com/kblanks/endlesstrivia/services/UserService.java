@@ -1,10 +1,8 @@
 package com.kblanks.endlesstrivia.services;
 
-import com.kblanks.endlesstrivia.data.Quiz;
 import com.kblanks.endlesstrivia.data.User;
 import com.kblanks.endlesstrivia.data.UserRepository;
 
-import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
