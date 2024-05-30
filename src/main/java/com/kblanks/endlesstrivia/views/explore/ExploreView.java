@@ -1,5 +1,6 @@
 package com.kblanks.endlesstrivia.views.explore;
 
+import com.kblanks.endlesstrivia.services.QuizService;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.html.H2;
@@ -32,12 +33,14 @@ import jakarta.annotation.security.PermitAll;
 @PermitAll
 public class ExploreView extends Main implements HasComponents, HasStyle {
 
+    private QuizService quizService;
     private OrderedList imageContainer;
 
-    public ExploreView() {
-        constructUI();
+    public ExploreView(QuizService quizService) {
+        this.quizService = quizService;
 
-        imageContainer.add(new ExploreViewCard("Snow mountains under stars",
+        constructUI();
+        /*imageContainer.add(new ExploreViewCard("Snow mountains under stars",
                 "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"));
         imageContainer.add(new ExploreViewCard("Snow covered mountain",
                 "https://images.unsplash.com/photo-1512273222628-4daea6e55abb?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"));
@@ -48,8 +51,11 @@ public class ExploreView extends Main implements HasComponents, HasStyle {
         imageContainer.add(new ExploreViewCard("Mountain with fog",
                 "https://images.unsplash.com/photo-1513147122760-ad1d5bf68cdb?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"));
         imageContainer.add(new ExploreViewCard("Mountain at night",
-                "https://images.unsplash.com/photo-1562832135-14a35d25edef?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=815&q=80"));
+                "https://images.unsplash.com/photo-1562832135-14a35d25edef?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=815&q=80"));*/
 
+        quizService.findAll()
+                .forEach(quiz -> imageContainer.add(new ExploreViewCard(quiz.getName(), quiz.getDescription(), quiz.getOwner().getName(), "alt",
+                "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80")));
     }
 
     private void constructUI() {
@@ -60,7 +66,7 @@ public class ExploreView extends Main implements HasComponents, HasStyle {
         container.addClassNames(AlignItems.CENTER, JustifyContent.BETWEEN);
 
         VerticalLayout headerContainer = new VerticalLayout();
-        H2 header = new H2("Beautiful photos");
+        H2 header = new H2("Find new quizzes");
         header.addClassNames(Margin.Bottom.NONE, Margin.Top.XLARGE, FontSize.XXXLARGE);
         Paragraph description = new Paragraph("Royalty free photos and pictures, courtesy of Unsplash");
         description.addClassNames(Margin.Bottom.XLARGE, Margin.Top.NONE, TextColor.SECONDARY);
