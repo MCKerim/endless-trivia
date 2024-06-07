@@ -1,11 +1,14 @@
 package com.kblanks.endlesstrivia.service;
 
+import com.kblanks.endlesstrivia.domain.model.Question;
 import com.kblanks.endlesstrivia.domain.model.Quiz;
+import com.kblanks.endlesstrivia.persistence.repository.QuestionRepository;
 import com.kblanks.endlesstrivia.persistence.repository.QuizRepository;
 import com.kblanks.endlesstrivia.domain.model.User;
 import com.kblanks.endlesstrivia.persistence.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,16 +20,19 @@ import java.util.stream.Stream;
 public class QuizService {
     private final QuizRepository quizRepository;
     private final UserRepository userRepository;
+    private final QuestionRepository questionRepository;
 
-    public QuizService(QuizRepository quizRepository, UserRepository userRepository) {
+    public QuizService(QuizRepository quizRepository, UserRepository userRepository, QuestionRepository questionRepository) {
         this.quizRepository = quizRepository;
         this.userRepository = userRepository;
+        this.questionRepository = questionRepository;
     }
 
     public List<Quiz> findAll() {
         return quizRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Optional<Quiz> get(Long id) {
         return quizRepository.findById(id);
     }
@@ -45,6 +51,11 @@ public class QuizService {
 
     public void update(Quiz quiz) {
         quizRepository.save(quiz);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Question> getQuestions(Quiz quiz) {
+        return questionRepository.findAllByQuiz(quiz);
     }
 
     @PostConstruct
