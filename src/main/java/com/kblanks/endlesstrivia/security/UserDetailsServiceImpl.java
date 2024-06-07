@@ -1,7 +1,7 @@
 package com.kblanks.endlesstrivia.security;
 
-import com.kblanks.endlesstrivia.data.User;
-import com.kblanks.endlesstrivia.data.UserRepository;
+import com.kblanks.endlesstrivia.domain.model.User;
+import com.kblanks.endlesstrivia.persistence.repository.UserRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;

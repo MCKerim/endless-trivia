@@ -1,6 +1,5 @@
-package com.kblanks.endlesstrivia.data;
+package com.kblanks.endlesstrivia.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -12,27 +11,24 @@ public class Quiz extends AbstractEntity {
 
     @NotNull
     @NotEmpty
-    private String name = "";
-
+    private String title = "";
     private String description = "";
-
     private String image = "";
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference
-    private User owner;
+    private User user;
 
     public Quiz() {
 
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -51,11 +47,11 @@ public class Quiz extends AbstractEntity {
         this.image = image;
     }
 
-    public User getOwner() {
-        return owner;
+    public User getUser() {
+        return user;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

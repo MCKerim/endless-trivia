@@ -1,4 +1,4 @@
-package com.kblanks.endlesstrivia.services;
+package com.kblanks.endlesstrivia.service;
 
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.hilla.BrowserCallable;

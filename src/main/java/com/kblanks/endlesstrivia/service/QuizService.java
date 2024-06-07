@@ -1,14 +1,15 @@
-package com.kblanks.endlesstrivia.services;
+package com.kblanks.endlesstrivia.service;
 
-import com.kblanks.endlesstrivia.data.Quiz;
-import com.kblanks.endlesstrivia.data.QuizRepository;
-import com.kblanks.endlesstrivia.data.User;
-import com.kblanks.endlesstrivia.data.UserRepository;
+import com.kblanks.endlesstrivia.domain.model.Quiz;
+import com.kblanks.endlesstrivia.persistence.repository.QuizRepository;
+import com.kblanks.endlesstrivia.domain.model.User;
+import com.kblanks.endlesstrivia.persistence.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -26,8 +27,8 @@ public class QuizService {
         return quizRepository.findAll();
     }
 
-    public Quiz get(Long id) {
-        return Objects.requireNonNull(quizRepository.findById(id).orElse(null));
+    public Optional<Quiz> get(Long id) {
+        return quizRepository.findById(id);
     }
 
     public long count() {
@@ -50,12 +51,17 @@ public class QuizService {
     public void populateTestData() {
         if (quizRepository.count() == 0) {
             List<User> users = userRepository.findAll();
+            if (users.isEmpty()) {
+                return;
+            }
             quizRepository.saveAll(
                     Stream.of("General Knowledge", "Mathematics", "Sports", "History", "Geography", "Science")
                             .map(name -> {
                                 Quiz quiz = new Quiz();
-                                quiz.setName(name);
-                                quiz.setOwner(users.getFirst());
+                                quiz.setTitle(name);
+                                quiz.setDescription("Description");
+                                quiz.setImage("image.png");
+                                quiz.setUser(users.getFirst());
                                 return quiz;
                             }).collect(Collectors.toList()));
         }

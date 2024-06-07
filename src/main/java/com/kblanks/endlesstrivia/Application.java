@@ -1,6 +1,6 @@
 package com.kblanks.endlesstrivia;
 
-import com.kblanks.endlesstrivia.data.UserRepository;
+import com.kblanks.endlesstrivia.persistence.repository.UserRepository;
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.theme.Theme;
 import javax.sql.DataSource;

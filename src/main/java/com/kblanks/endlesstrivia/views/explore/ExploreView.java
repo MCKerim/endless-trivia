@@ -1,6 +1,6 @@
 package com.kblanks.endlesstrivia.views.explore;
 
-import com.kblanks.endlesstrivia.services.QuizService;
+import com.kblanks.endlesstrivia.service.QuizService;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.html.H2;
@@ -38,12 +38,14 @@ public class ExploreView extends Main implements HasComponents, HasStyle {
 
     public ExploreView(QuizService quizService) {
         this.quizService = quizService;
-
         constructUI();
-
         this.quizService.findAll()
-                .forEach(quiz -> imageContainer.add(new ExploreViewCard(quiz.getName(), quiz.getDescription(), quiz.getOwner().getName(), "alt",
-                "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80")));
+                .forEach(quiz -> {
+                    ExploreViewCard card = new ExploreViewCard(quiz.getTitle(), quiz.getId().toString(), quiz.getUser().getName(), "alt",
+                            "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80");
+                    card.addClickListener(event -> this.getUI().ifPresent(ui -> ui.navigate("playquiz/" + quiz.getId())));
+                    imageContainer.add(card);
+                });
     }
 
     private void constructUI() {

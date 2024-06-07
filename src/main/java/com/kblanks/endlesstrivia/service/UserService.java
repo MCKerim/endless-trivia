@@ -1,7 +1,7 @@
-package com.kblanks.endlesstrivia.services;
+package com.kblanks.endlesstrivia.service;
 
-import com.kblanks.endlesstrivia.data.User;
-import com.kblanks.endlesstrivia.data.UserRepository;
+import com.kblanks.endlesstrivia.domain.model.User;
+import com.kblanks.endlesstrivia.persistence.repository.UserRepository;
 
 import java.util.Optional;
 import org.springframework.data.domain.Page;

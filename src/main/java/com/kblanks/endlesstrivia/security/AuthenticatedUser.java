@@ -1,7 +1,7 @@
 package com.kblanks.endlesstrivia.security;
 
-import com.kblanks.endlesstrivia.data.User;
-import com.kblanks.endlesstrivia.data.UserRepository;
+import com.kblanks.endlesstrivia.domain.model.User;
+import com.kblanks.endlesstrivia.persistence.repository.UserRepository;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetails;

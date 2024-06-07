@@ -1,11 +1,8 @@
-package com.kblanks.endlesstrivia.data;
+package com.kblanks.endlesstrivia.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,10 +19,6 @@ public class User extends AbstractEntity {
     @Lob
     @Column(length = 1000000)
     private byte[] profilePicture;
-
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    @JsonManagedReference
-    private List<Quiz> ownedQuizzes = new LinkedList<>();
 
     public String getUsername() {
         return username;

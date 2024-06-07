@@ -1,8 +1,8 @@
 package com.kblanks.endlesstrivia.views.addquiz;
 
-import com.kblanks.endlesstrivia.data.Quiz;
-import com.kblanks.endlesstrivia.services.QuizService;
-import com.kblanks.endlesstrivia.services.UserEndpoint;
+import com.kblanks.endlesstrivia.domain.model.Quiz;
+import com.kblanks.endlesstrivia.service.QuizService;
+import com.kblanks.endlesstrivia.service.UserEndpoint;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -73,10 +73,10 @@ public class AddQuizView extends Composite<VerticalLayout> {
         }
 
         Quiz quiz = new Quiz();
-        quiz.setName(nameField.getValue());
+        quiz.setTitle(nameField.getValue());
         quiz.setDescription(descriptionField.getValue());
         quiz.setImage(imageField.getValue());
-        quiz.setOwner(userEndpoint.getAuthenticatedUser().get());
+        quiz.setUser(userEndpoint.getAuthenticatedUser().get());
         quizService.save(quiz);
 
         nameField.clear();

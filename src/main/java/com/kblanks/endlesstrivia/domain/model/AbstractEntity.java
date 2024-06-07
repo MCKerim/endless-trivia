@@ -1,4 +1,4 @@
-package com.kblanks.endlesstrivia.data;
+package com.kblanks.endlesstrivia.domain.model;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

@@ -1,6 +1,6 @@
-package com.kblanks.endlesstrivia.services;
+package com.kblanks.endlesstrivia.service;
 
-import com.kblanks.endlesstrivia.data.User;
+import com.kblanks.endlesstrivia.domain.model.User;
 import com.kblanks.endlesstrivia.security.AuthenticatedUser;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.hilla.Endpoint;
